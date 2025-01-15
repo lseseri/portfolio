@@ -46,11 +46,20 @@ nav a.current {
 }
 form input, form textarea, form button {
   font: inherit;
-  display: block;
+  /* display: block;
   width: 100%;
-  box-sizing: border-box;
+  box-sizing: border-box; */
+}
+form button {
+  grid-column: 1 / -1;
+}
+form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
 }
 form label {
-  display: block;
-  margin-block: 1em;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
 }
