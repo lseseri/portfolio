@@ -19,7 +19,7 @@ nav ul li {
 }
 nav {
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: oklch(80% 3% 200);
@@ -42,4 +42,15 @@ nav a.current {
   border-bottom-style: solid;
   border-bottom-color: oklch(80% 3% 200);
   padding-bottom: 0.2em;
+  font-weight: bold;
+}
+form input, form textarea, form button {
+  font: inherit;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+form label {
+  display: block;
+  margin-block: 1em;
 }
