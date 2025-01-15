@@ -8,6 +8,21 @@ body {
     padding: 2rem;
   }
 nav ul,
-nav ul li{
+nav ul li {
   display: contents;
+}
+nav {
+  display: flex;
+  margin-bottom: 1rem;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: oklch(80% 3% 200);
+  border-width: 0.4em;
+}
+nav a {
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  padding: 0.5em;
 }
