@@ -4,8 +4,10 @@ body {
        */
     font: 100%/1.5 system-ui;
     max-width: 100ch;
-    /* margin-left: auto;
-    margin-right: auto; */
     margin-inline: auto;
-    padding: 5%;
+    padding: 2rem;
   }
+nav ul,
+nav ul li{
+  display: contents;
+}
