@@ -1,5 +1,7 @@
 :root {
   --color-accent: oklch(75% 50% 300);
+  /* --font-size-h1: 400%;
+  --font-size-h2: 200%; */
 }
 html {
   accent-color: var(--color-accent);
@@ -63,3 +65,49 @@ form label {
   grid-template-columns: subgrid;
   grid-column: 1 / -1;
 }
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1em;
+}
+.projects article {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+}
+.projects h2 {
+  margin: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+  text-wrap: balance;
+}
+h1 {
+  font-size: 400%;
+}
+h2 {
+  font-size: 200%;
+}
+h3 {
+  font-size: 150%;
+}
+h4, h5, h6 {
+  font-size: 100%;
+}
+
+/* h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+  text-wrap: balance;
+  h1 {
+    font-size: 400%;
+  }
+  h2 {
+    font-size: 200%;
+  }
+  h3 {
+    font-size: 150%;
+  }
+  h4, h5, h6 {
+    font-size: 100%;
+  }
+} */
