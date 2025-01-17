@@ -1,7 +1,5 @@
 :root {
   --color-accent: oklch(75% 50% 300);
-  /* --font-size-h1: 400%;
-  --font-size-h2: 200%; */
 }
 html {
   accent-color: var(--color-accent);
@@ -96,24 +94,39 @@ h4, h5, h6 {
 }
 .contact-info {
   text-align: left;
+  color: rgb(78, 22, 78);
 }
 .contact-info a {
-  color: rgb(131, 91, 241);
+  text-decoration: none;
+  color: rgb(78, 22, 78);
 }
-
-/* h1, h2, h3, h4, h5, h6 {
-  line-height: 1.1;
-  text-wrap: balance;
-  h1 {
-    font-size: 400%;
-  }
-  h2 {
-    font-size: 200%;
-  }
-  h3 {
-    font-size: 150%;
-  }
-  h4, h5, h6 {
-    font-size: 100%;
-  }
-} */
+.contact-info a:hover {
+  text-decoration: underline;
+}
+header {
+  text-align: left;
+  border-bottom: 2px solid oklch(80% 3% 200);
+}
+section {
+  padding: 0.5rem;
+  border-bottom: 2px solid oklch(80% 3% 200);
+}
+.flex-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 1em;
+  align-items: start;
+}
+.flex-container h2 {
+  color: purple;
+  align-self: start;
+}
+.flex-container ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+#experience .experience p {
+  font-style: italic;
+}
