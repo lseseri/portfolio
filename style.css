@@ -3,6 +3,7 @@
 }
 html {
   accent-color: var(--color-accent);
+  color-scheme: light dark;
 }
 body {
     /* Set line height to 1.5 times the font size
@@ -22,7 +23,9 @@ nav {
   margin-bottom: 0.5rem;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  border-bottom-color: oklch(80% 3% 200);
+  /* border-bottom-color: oklch(80% 3% 200); */
+  --border-color: oklch(50% 10% 200 / 40%);
+  border-bottom-color: var(--border-color);
 }
 nav a {
   flex: 1;
@@ -35,12 +38,14 @@ nav a:hover {
   border-bottom-width: 0.4em;
   border-bottom-style: solid;
   border-bottom-color: var(--color-accent);
-  background-color: oklch(from var(--color-accent) 95% 5% h);
+  /* background-color: oklch(from var(--color-accent) 95% 5% h); */
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
 }
 nav a.current {
   border-bottom-width: 0.4em;
   border-bottom-style: solid;
-  border-bottom-color: oklch(80% 3% 200);
+  /* border-bottom-color: oklch(80% 3% 200); */
+  border-bottom-color: var(--border-color);
   padding-bottom: 0.2em;
   font-weight: bold;
 }
@@ -94,22 +99,22 @@ h4, h5, h6 {
 }
 .contact-info {
   text-align: left;
-  color: rgb(78, 22, 78);
+  color: rgb(96, 13, 96);
 }
 .contact-info a {
   text-decoration: none;
-  color: rgb(78, 22, 78);
+  color: rgb(96, 13, 96);
 }
 .contact-info a:hover {
   text-decoration: underline;
 }
 header {
   text-align: left;
-  border-bottom: 2px solid oklch(80% 3% 200);
+  border-bottom: 2px solid oklch(50% 10% 200 / 40%);
 }
 section {
   padding: 0.5rem;
-  border-bottom: 2px solid oklch(80% 3% 200);
+  border-bottom: 2px solid oklch(50% 10% 200 / 40%);
 }
 .flex-container {
   display: grid;
@@ -118,7 +123,7 @@ section {
   align-items: start;
 }
 .flex-container h2 {
-  color: purple;
+  color: rgb(146, 30, 146);
   align-self: start;
 }
 .flex-container ul {
@@ -129,4 +134,12 @@ section {
 }
 #experience .experience p {
   font-style: italic;
+}
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 80%;
+  font-family: inherit;
 }
