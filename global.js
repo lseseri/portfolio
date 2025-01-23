@@ -79,3 +79,23 @@ select.addEventListener('input', function (event) {
   setColorScheme(newColorScheme);
 });
 
+let form = document.querySelector('form');
+
+form?.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  let data = new FormData(form);
+
+  let url = form.action;
+  url += "?";
+
+  let params = [];
+
+  for (let [name, value] of data) {
+    params.push(`${encodeURIComponent(name)}=${encodeURIComponent(value)}`);
+  }
+
+  url += params.join("&");
+  console.log(url);
+  location.href = url;
+})
