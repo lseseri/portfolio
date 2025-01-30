@@ -99,3 +99,47 @@ form?.addEventListener('submit', function (event) {
   console.log(url);
   location.href = url;
 })
+
+export async function fetchJSON(url) {
+  try {
+      // Fetch the JSON file from the given URL
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch projects: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return data; 
+
+  } catch (error) {
+      console.error('Error fetching or parsing JSON data:', error);
+  }
+}
+
+export function renderProjects(project, containerElement, headingLevel = 'h2') {
+  // Your code will go here
+  containerElement.innerHTML = '';
+
+  const projectCountElement = document.querySelector('.projects-title');
+  if (projectCountElement) {
+    projectCountElement.textContent = project.length;
+  }
+
+  project.forEach(element => {
+
+    const article = document.createElement('article');
+
+    // Create the heading element dynamically
+    const heading = document.createElement(headingLevel);
+    heading.textContent = element.title;
+
+    article.innerHTML = `
+        <h3>${element.title}</h3>
+        <img src="${element.image}" alt="${element.title}">
+        <p>${element.description}</p>
+    `;
+
+    containerElement.appendChild(article);
+  });
+}
