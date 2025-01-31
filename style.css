@@ -143,3 +143,19 @@ section {
   font-size: 80%;
   font-family: inherit;
 }
+
+.github-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: left;
+}
+.github-stats dt {
+  display: block;
+  grid-row: 1;
+  font-size: 1.2rem;
+}
+.github-stats dd {
+  display: block;
+  grid-row: 2;
+  font-size: 1.2rem;
+}
