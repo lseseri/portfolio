@@ -76,11 +76,18 @@ form label {
 .projects article {
   display: grid;
   grid-template-rows: subgrid;
-  grid-row: span 3;
+  grid-row: span 4;
 }
 .projects h2 {
   margin: 0;
 }
+.projects article h3 {
+  margin-bottom: 0;
+}
+.projects article .project-year {
+  margin-bottom: 0;
+}
+
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   text-wrap: balance;
