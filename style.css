@@ -85,7 +85,8 @@ form label {
   margin-bottom: 0;
 }
 .projects article .project-year {
-  margin-bottom: 0;
+  font-family: Baskerville;
+  font-variant-numeric: oldstyle-nums;
 }
 
 h1, h2, h3, h4, h5, h6 {
