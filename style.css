@@ -167,3 +167,10 @@ section {
   grid-row: 2;
   font-size: 1.2rem;
 }
+
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+
+  overflow: visible;
+}
