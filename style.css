@@ -174,3 +174,33 @@ section {
 
   overflow: visible;
 }
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
+  gap: 1em;
+  padding: 1em;
+  margin-top: 1em;
+  border: 1.5px solid oklch(50% 10% 200 / 40%);
+  list-style: none;
+  padding-left: 1em;
+  flex: 1;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em; 
+}
+.swatch {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: var(--color);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.container {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
