@@ -14,8 +14,24 @@ function filterProjects(query) {
   });
 }
 
-
 let selectedIndex = -1;
+
+function getFilteredProjects(query, selectedYear) {
+  let filtered = projects;
+
+  if (query) {
+    filtered = filtered.filter((project) => {
+      let values = Object.values(project).join('\n').toLowerCase();
+      return values.includes(query.toLowerCase());
+    });
+  }
+
+  if (selectedYear) {
+    filtered = filtered.filter((p) => p.year === selectedYear);
+  }
+
+  return filtered;
+}
 
 // Refactor all plotting into one function
 function renderPieChart(projectsGiven) {
@@ -57,12 +73,9 @@ function renderPieChart(projectsGiven) {
         svg.selectAll('path').attr('class', (_, i) => i === selectedIndex ? 'selected' : ''); 
         legend.selectAll('li').attr('class', (_, i) => i === selectedIndex ? 'selected' : '');
 
-        if (selectedIndex === -1) {
-          renderProjects(projects, projectsContainer, 'h2');  // Show all projects
-        } else {
-          let filteredProjects = projects.filter(p => p.year === selectedYear);
-          renderProjects(filteredProjects, projectsContainer, 'h2');
-        }
+        let query = searchInput.value;
+        let filteredProjects = getFilteredProjects(query, selectedYear);
+        renderProjects(filteredProjects, projectsContainer, 'h2');
       });
   });
 
@@ -79,25 +92,9 @@ renderPieChart(projects);
 
 searchInput.addEventListener('input', (event) => {
   let query = event.target.value;
-  let filteredResults = filterProjects(query);
+  // let filteredResults = filterProjects(query);
+  let selectedYear = selectedIndex !== -1 ? d3.selectAll('path').data()[selectedIndex]?.label : null;
+  let filteredResults = getFilteredProjects(query, selectedYear);
   renderProjects(filteredResults, projectsContainer, 'h2');
   renderPieChart(filteredResults);
 });
-
-// let selectedIndex = -1;
-// let svg = d3.select('svg');
-// svg.selectAll('path').remove();
-
-// arcs.forEach((arc, i) => { 
-//   svg.append('path')
-//     .attr('d', arc)
-//     .attr('fill', colors(i))
-//     .on('click', () => {
-//       selectedIndex = selectedIndex === i ? -1 : i;
-      
-//       svg.selectAll('path')
-//         .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
-//       legend.selectAll('li')
-//         .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
-//     });
-// });
