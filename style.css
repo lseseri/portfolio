@@ -204,3 +204,22 @@ section {
   align-items: center;
   gap: 2em;
 }
+
+&:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
+}
+path {
+  transition: 300ms;
+}
+.selected {
+  --color: grey !important;
+
+  &:is(path) {
+    fill: var(--color);
+  }
+}
+path {
+  cursor: pointer;
+}
