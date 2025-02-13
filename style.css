@@ -241,7 +241,3 @@ path {
   font-size: 1.3rem;
   padding: 0.5em;
 }
-.gridlines line{
-  stroke: rgb(178, 169, 169); 
-  stroke-opacity: 0.5;
-}

@@ -133,7 +133,9 @@ function createScatterplot() {
     .attr('transform', `translate(${usableArea.left}, 0)`);
 
   // Create gridlines as an axis with no labels and full-width ticks
-  gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
+  gridlines
+    .call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width))
+    .attr('color', 'lightgray');
 
   // Create the axes
   const xAxis = d3.axisBottom(xScale);
