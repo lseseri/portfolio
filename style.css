@@ -230,7 +230,6 @@ path {
   text-align: left;
   gap: 0.5em; 
 }
-
 .stats dt {
   font-size: 1rem;
   font-weight: bold;
@@ -238,8 +237,11 @@ path {
   color: rgb(130, 125, 125);
   padding: 0.5em;
 }
-
 .stats dd {
   font-size: 1.3rem;
   padding: 0.5em;
+}
+.gridlines line{
+  stroke: rgb(178, 169, 169); 
+  stroke-opacity: 0.5;
 }
