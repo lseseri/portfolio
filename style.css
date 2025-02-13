@@ -223,3 +223,23 @@ path {
 path {
   cursor: pointer;
 }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); 
+  text-align: left;
+  gap: 0.5em; 
+}
+
+.stats dt {
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(130, 125, 125);
+  padding: 0.5em;
+}
+
+.stats dd {
+  font-size: 1.3rem;
+  padding: 0.5em;
+}
