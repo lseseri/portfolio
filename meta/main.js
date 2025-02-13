@@ -126,6 +126,12 @@ function createScatterplot() {
   xScale.range([usableArea.left, usableArea.right]);
   yScale.range([usableArea.bottom, usableArea.top]);
 
+  const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+  const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([2, 30]); // adjust these values based on your experimentation
+
+  // Sort commits by total lines in descending order
+  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+
   // Add gridlines before axes
   const gridlines = svg
     .append('g')
@@ -159,19 +165,20 @@ function createScatterplot() {
 
   dots
     .selectAll('circle')
-    .data(commits)
+    .data(sortedCommits)
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
-    .attr('r', 5)
-    .attr('fill', 'steelblue')
-    .on('mouseenter', (event, commit) => {
-      updateTooltipContent(commit);
+    .attr('r', (d) => rScale(d.totalLines))
+    .style('fill-opacity', 0.7) // Add transparency for overlapping dots
+    .on('mouseenter', function (event, d, i) {
+      d3.select(event.currentTarget).style('fill-opacity', 1); // Full opacity on hover
+      updateTooltipContent(d);
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
-    .on('mousemove', updateTooltipPosition) 
-    .on('mouseleave', () => {
+    .on('mouseleave', function () {
+      d3.select(event.currentTarget).style('fill-opacity', 0.7); // Restore transparency
       updateTooltipContent({});
       updateTooltipVisibility(false);
     });
