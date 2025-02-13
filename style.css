@@ -241,3 +241,36 @@ path {
   font-size: 1.3rem;
   padding: 0.5em;
 }
+.info {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 0;
+  gap: 0.5em;
+}
+.tooltip {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+  border-radius: 0.5em;
+  backdrop-filter: blur(0.2em);
+  padding: 0.5em;
+}
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+circle:hover {
+  transform: scale(1.5);
+}
+dl.info {
+  /* ... other styles ... */
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
+}
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
+}
