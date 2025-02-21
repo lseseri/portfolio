@@ -135,11 +135,17 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
     const heading = document.createElement(headingLevel);
     heading.textContent = element.title;
 
+    let projectURL = '';
+    if (element.url) {
+      projectURL = `<p class="project-url"><a href="${element.url}" target="_blank">View Project</a></p>`;
+    }
+
     article.innerHTML = `
         <h3>${element.title}</h3>
-        <img src="${element.image}" alt="${element.title}">
+        <img src="${element.image}" alt="${element.title}" width="250" height="150">
         <div class="project-details">
           <p>${element.description}</p>
+          ${projectURL}
           <p class="project-year">c. ${element.year}</p>
         </div>
     `;
