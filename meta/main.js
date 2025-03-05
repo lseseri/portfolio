@@ -1,5 +1,6 @@
 let data = [];
 let commits = [];
+let selectedCommits = [];
 
 async function loadData() {
   data = await d3.csv('loc.csv', (row) => ({
@@ -176,13 +177,13 @@ function createScatterplot() {
     .attr('fill', 'steelblue')
     .style('fill-opacity', 0.7) // Add transparency for overlapping dots
     .on('mouseenter', function (event, d, i) {
-      d3.select(event.currentTarget).style('fill-opacity', 1); // Full opacity on hover
+      d3.select(event.currentTarget).classed('selected', True).style('fill-opacity', 1); // Full opacity on hover
       updateTooltipContent(d);
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
     .on('mouseleave', function () {
-      d3.select(event.currentTarget).style('fill-opacity', 0.7); // Restore transparency
+      d3.select(event.currentTarget).classed('selected', isCommitSelected(d)).style('fill-opacity', 0.7); // Restore transparency
       updateTooltipContent({});
       updateTooltipVisibility(false);
     });
@@ -232,21 +233,24 @@ function brushSelector() {
 }
 
 function brushed(event) {
-  brushSelection = event.selection;
+  let brushSelection = event.selection;
+  selectedCommits = !brushSelection
+    ? []
+    : commits.filter((commit) => {
+        let min = { x: brushSelection[0][0], y: brushSelection[0][1] };
+        let max = { x: brushSelection[1][0], y: brushSelection[1][1] };
+        let x = xScale(commit.date);
+        let y = yScale(commit.hourFrac);
+
+        return x >= min.x && x <= max.x && y >= min.y && y <= max.y;
+      });
+
   updateSelection();
   updateLanguageBreakdown();
 }
 
 function isCommitSelected(commit) {
-  if (!brushSelection) {
-    return false;
-  }
-  // return true if commit is within brushSelection and false in not
-  const min = {x : brushSelection[0][0], y: brushSelection[0][1]};
-  const max = {x : brushSelection[1][0], y: brushSelection[1][1]};
-  const x = xScale(commit.date);
-  const y = yScale(commit.hourFrac);
-  return x >= min.x && x <= max.x && y >= min.y && y <= max.y;
+  return selectedCommits.includes(commit);
 }
 
 function updateSelection() {
@@ -269,9 +273,6 @@ function updateSelection() {
 }
 
 function updateLanguageBreakdown() {
-  const selectedCommits = brushSelection
-    ? commits.filter(isCommitSelected)
-    : [];
   const container = document.getElementById('language-breakdown');
 
   if (selectedCommits.length === 0) {
