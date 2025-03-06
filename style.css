@@ -258,9 +258,13 @@ path {
   padding: 0.5em;
 }
 circle {
-  transition: 200ms;
+  /* transition: 200ms; */
+  transition: r 0.3s ease;
   transform-origin: center;
   transform-box: fill-box;
+}
+@starting-style {
+  r: 0;
 }
 circle:hover {
   transform: scale(1.5);
@@ -289,4 +293,16 @@ dl.info[hidden]:not(:hover, :focus-within) {
 }
 circle.selected {
   fill: #ff6b6b;
+}
+
+.commit-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+#commit-slider {
+  flex-grow: 1;
+}
+#commit-time-slider {
+  margin-left: auto;
 }

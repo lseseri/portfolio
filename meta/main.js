@@ -1,6 +1,7 @@
 let data = [];
 let commits = [];
 let selectedCommits = [];
+let commitProgress = 100;
 
 async function loadData() {
   data = await d3.csv('loc.csv', (row) => ({
@@ -12,10 +13,18 @@ async function loadData() {
     datetime: new Date(row.datetime),
   }));
 
-  displayStats();
-  createScatterplot();
+  processCommits();
+  
+  timeScale = d3.scaleTime()
+            .domain([d3.min(commits, d => d.datetime), d3.max(commits, d => d.datetime)])
+            .range([0, 100]);
+  commitMaxTime = timeScale.invert(commitProgress);
+
+  updateStats(commits);
+  updateScatterplot(commits);
   updateTooltipVisibility(false);
   brushSelector();
+  updateCommitFilter();
 }
 
 function processCommits() {
@@ -47,29 +56,28 @@ function processCommits() {
     });
 }
 
-function displayStats() {
-  // Process commits first
-  processCommits();
+function updateStats(filteredCommits) {
+  d3.select('#stats').select('dl').remove();
 
   // Create the dl element
   const dl = d3.select('#stats').append('dl').attr('class', 'stats');
 
   // Add total LOC
   dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
-  dl.append('dd').text(data.length);
+  dl.append('dd').text(filteredCommits.reduce((sum, commit) => sum + commit.totalLines, 0));
 
   // Add total commits
   dl.append('dt').text('Total Commits');
-  dl.append('dd').text(commits.length);
+  dl.append('dd').text(filteredCommits.length);
 
   // Number of distinct files
-  const files = d3.groups(data, (d) => d.file).length;
+  const files = d3.groups(filteredCommits.flatMap((commit) => commit.lines), (d) => d.file).length;
   dl.append('dt').text('Total Files');
   dl.append('dd').text(files);
 
   // Maximum File Length
   const maxFileLength = d3.max(
-    d3.rollups(data, (v) => d3.max(v, (d) => d.line), (d) => d.file),
+    d3.rollups(filteredCommits.flatMap((commit) => commit.lines), (v) => d3.max(v, (d) => d.line), (d) => d.file),
     (d) => d[1]
   );
   dl.append('dt').text('Maximum file length (lines)');
@@ -77,7 +85,7 @@ function displayStats() {
 
   // Average File Length
   const fileLengths = d3.rollups(
-    data,
+    filteredCommits.flatMap((commit) => commit.lines),
     (v) => d3.max(v, (v) => v.line),
     (d) => d.file
   );
@@ -87,7 +95,7 @@ function displayStats() {
 
   // Most active time period
   const workByPeriod = d3.rollups(
-    data,
+    filteredCommits.flatMap((commit) => commit.lines),
     (v) => v.length,
     (d) => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' })
   );
@@ -98,7 +106,7 @@ function displayStats() {
 
 let xScale, yScale;
 
-function createScatterplot() {
+function updateScatterplot(filteredCommits) {
   const width = 1000;
   const height = 600;
   const margin = { top: 10, right: 10, bottom: 30, left: 20 };
@@ -112,6 +120,8 @@ function createScatterplot() {
     height: height - margin.top - margin.bottom,
   };
 
+  d3.select('svg').remove();
+
   const svg = d3
     .select('#chart')
     .append('svg')
@@ -120,7 +130,7 @@ function createScatterplot() {
 
   xScale = d3
     .scaleTime()
-    .domain(d3.extent(commits, (d) => d.datetime))
+    .domain(d3.extent(filteredCommits, (d) => d.datetime))
     .range([0, width])
     .nice();
 
@@ -130,11 +140,11 @@ function createScatterplot() {
   xScale.range([usableArea.left, usableArea.right]);
   yScale.range([usableArea.bottom, usableArea.top]);
 
-  const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+  const [minLines, maxLines] = d3.extent(filteredCommits, (d) => d.totalLines);
   const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([2, 30]); // adjust these values based on your experimentation
 
-  // Sort commits by total lines in descending order
-  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+  // // Sort commits by total lines in descending order
+  // const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
 
   // Add gridlines before axes
   const gridlines = svg
@@ -169,7 +179,7 @@ function createScatterplot() {
 
   dots
     .selectAll('circle')
-    .data(sortedCommits)
+    .data(filteredCommits)
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
@@ -177,13 +187,13 @@ function createScatterplot() {
     .attr('fill', 'steelblue')
     .style('fill-opacity', 0.7) // Add transparency for overlapping dots
     .on('mouseenter', function (event, d, i) {
-      d3.select(event.currentTarget).classed('selected', True).style('fill-opacity', 1); // Full opacity on hover
+      d3.select(event.currentTarget).style('fill-opacity', 1); // Full opacity on hover
       updateTooltipContent(d);
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
     .on('mouseleave', function () {
-      d3.select(event.currentTarget).classed('selected', isCommitSelected(d)).style('fill-opacity', 0.7); // Restore transparency
+      d3.select(event.currentTarget).style('fill-opacity', 0.7); // Restore transparency
       updateTooltipContent({});
       updateTooltipVisibility(false);
     });
@@ -236,11 +246,11 @@ function brushed(event) {
   let brushSelection = event.selection;
   selectedCommits = !brushSelection
     ? []
-    : commits.filter((commit) => {
+    : commits.filter((filteredCommits) => {
         let min = { x: brushSelection[0][0], y: brushSelection[0][1] };
         let max = { x: brushSelection[1][0], y: brushSelection[1][1] };
-        let x = xScale(commit.date);
-        let y = yScale(commit.hourFrac);
+        let x = xScale(filteredCommits.date);
+        let y = yScale(filteredCommits.hourFrac);
 
         return x >= min.x && x <= max.x && y >= min.y && y <= max.y;
       });
@@ -259,10 +269,6 @@ function updateSelection() {
   console.log('Selected circles:', 
     d3.selectAll('circle.selected').size()  // Logs how many circles got the class
   );
-
-  const selectedCommits = brushSelection
-    ? commits.filter(isCommitSelected)
-    : [];
 
   const countElement = document.getElementById('selection-count');
   countElement.textContent = `${
@@ -304,6 +310,28 @@ function updateLanguageBreakdown() {
 
   return breakdown;
 }
+
+function updateCommitFilter() {
+  commitMaxTime = timeScale.invert(commitProgress);
+
+  // Update the <time> element inside the UI
+  d3.select("#commit-time-slider").text(commitMaxTime.toLocaleString(undefined, {
+    dateStyle: "long",
+    timeStyle: "short"
+  }));
+
+  // Filter and update commits based on commitMaxTime
+  let filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
+
+  updateStats(filteredCommits);
+  // Update the visualization
+  updateScatterplot(filteredCommits);
+}
+
+d3.select("#commit-slider").on("input", function () {
+  commitProgress = +this.value;
+  updateCommitFilter();
+});
 
 document.addEventListener('DOMContentLoaded', async () => {
   await loadData();
