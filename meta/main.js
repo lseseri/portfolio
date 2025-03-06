@@ -24,7 +24,8 @@ async function loadData() {
   updateScatterplot(commits);
   updateTooltipVisibility(false);
   brushSelector();
-  updateCommitFilter();
+  displayCommitFiles();
+  // updateCommitFilter();
 }
 
 function processCommits() {
@@ -142,9 +143,6 @@ function updateScatterplot(filteredCommits) {
 
   const [minLines, maxLines] = d3.extent(filteredCommits, (d) => d.totalLines);
   const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([2, 30]); // adjust these values based on your experimentation
-
-  // // Sort commits by total lines in descending order
-  // const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
 
   // Add gridlines before axes
   const gridlines = svg
@@ -311,16 +309,8 @@ function updateLanguageBreakdown() {
   return breakdown;
 }
 
-function updateCommitFilter() {
-  commitMaxTime = timeScale.invert(commitProgress);
-
-  // Update the <time> element inside the UI
-  d3.select("#commit-time-slider").text(commitMaxTime.toLocaleString(undefined, {
-    dateStyle: "long",
-    timeStyle: "short"
-  }));
-
-  // Filter and update commits based on commitMaxTime
+function displayCommitFiles() {
+  
   let filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
 
   let lines = filteredCommits.flatMap((d) => d.lines);
@@ -331,7 +321,7 @@ function updateCommitFilter() {
       return { name, lines };
     });
 
-    files = d3.sort(files, (d) => -d.lines.length);
+  files = d3.sort(files, (d) => -d.lines.length);
 
   d3.select('.files').selectAll('div').remove(); // don't forget to clear everything first so we can re-render
   let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
@@ -352,16 +342,60 @@ function updateCommitFilter() {
     .enter().append('div')
     .attr('class', 'line')
     .style('background', (d) => fileTypeColors(d.type));
-  
-
-  updateStats(filteredCommits);
-  // Update the visualization
-  updateScatterplot(filteredCommits);
 }
 
-d3.select("#commit-slider").on("input", function () {
-  commitProgress = +this.value;
-  updateCommitFilter();
+function renderItems(startIndex) {
+  commits.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+
+  // Clear previous content
+  itemsContainer.selectAll('div').remove();
+  const endIndex = Math.min(startIndex + VISIBLE_COUNT, commits.length);
+  let newCommitSlice = commits.slice(startIndex, endIndex);
+
+  // Update the scatterplot with the new slice of commits
+  updateScatterplot(newCommitSlice);
+
+  // Re-bind commit data and create elements for narrative
+  const commitDivs = itemsContainer.selectAll('div')
+                                   .data(newCommitSlice)
+                                   .enter()
+                                   .append('div')
+                                   .style('position', 'relative')  // Position relative to each other
+                                   .style('margin-bottom', '10px') // Space between each commit
+                                   .style('border-bottom', '1px solid #ddd') // Optional: a separator line between commits
+                                   .style('background-color', '#f9f9f9'); // Background for each commit
+
+  // Append the narrative for each commit
+  commitDivs.html((commit, index) => `
+      <p>
+          On ${commit.datetime.toLocaleString("en", {dateStyle: "full", timeStyle: "short"})}, I made
+          <a target="_blank">
+              ${index > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'}
+          </a>.
+          I edited ${commit.totalLines} lines across 
+          ${d3.rollups(commit.lines, D => D.length, d => d.file).length} files.
+          Then I looked over all I had made, and I saw that it was very good.
+      </p>
+  `);
+
+  // Ensure that the itemsContainer height is updated if necessary
+  itemsContainer.style('height', `${newCommitSlice.length * (ITEM_HEIGHT + 10)}px`); // Adjust for spacing
+}
+
+let NUM_ITEMS = 80; // Ideally, let this value be the length of your commit history
+let ITEM_HEIGHT = 30; // Feel free to change
+let VISIBLE_COUNT = 10; // Feel free to change as well
+let totalHeight = (NUM_ITEMS - 1) * ITEM_HEIGHT;
+const scrollContainer = d3.select('#scroll-container');
+const spacer = d3.select('#spacer');
+spacer.style('height', `${totalHeight}px`);
+const itemsContainer = d3.select('#items-container');
+
+scrollContainer.on('scroll', () => {
+  const scrollTop = scrollContainer.property('scrollTop');
+  let startIndex = Math.floor(scrollTop / ITEM_HEIGHT);
+  startIndex = Math.max(0, Math.min(startIndex, commits.length - VISIBLE_COUNT));
+  renderItems(startIndex);
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
