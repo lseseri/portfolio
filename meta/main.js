@@ -323,6 +323,37 @@ function updateCommitFilter() {
   // Filter and update commits based on commitMaxTime
   let filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
 
+  let lines = filteredCommits.flatMap((d) => d.lines);
+  let files = [];
+  files = d3
+    .groups(lines, (d) => d.file)
+    .map(([name, lines]) => {
+      return { name, lines };
+    });
+
+    files = d3.sort(files, (d) => -d.lines.length);
+
+  d3.select('.files').selectAll('div').remove(); // don't forget to clear everything first so we can re-render
+  let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
+  
+  let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
+
+  filesContainer.append('dt')
+    .append('code')
+    .text(d => d.name);
+
+  filesContainer.append('dt')
+    .append('small')
+    .html(d => `${d.lines.length} lines`);
+
+  filesContainer.append('dd')
+    .selectAll('div')
+    .data(d => d.lines)
+    .enter().append('div')
+    .attr('class', 'line')
+    .style('background', (d) => fileTypeColors(d.type));
+  
+
   updateStats(filteredCommits);
   // Update the visualization
   updateScatterplot(filteredCommits);

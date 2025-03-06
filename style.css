@@ -258,13 +258,10 @@ path {
   padding: 0.5em;
 }
 circle {
-  /* transition: 200ms; */
   transition: r 0.3s ease;
+  transform: 0.3s ease;
   transform-origin: center;
   transform-box: fill-box;
-}
-@starting-style {
-  r: 0;
 }
 circle:hover {
   transform: scale(1.5);
@@ -305,4 +302,36 @@ circle.selected {
 }
 #commit-time-slider {
   margin-left: auto;
+}
+
+.files {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.files > div {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+.files dt {
+  grid-column: 1;
+}
+.file dd {
+  grid-column: 2;
+}
+dd {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  align-content: start;
+  gap: 0.15em;
+  padding-top: 0.6em;
+  margin-left: 0;
+}
+.line {
+  display: flex;
+  width: 0.5em;
+  aspect-ratio: 1;
+  border-radius: 50%;
 }
