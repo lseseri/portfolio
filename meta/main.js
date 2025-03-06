@@ -383,7 +383,7 @@ function renderItems(startIndex) {
 }
 
 let NUM_ITEMS = 80; // Ideally, let this value be the length of your commit history
-let ITEM_HEIGHT = 30; // Feel free to change
+let ITEM_HEIGHT = 20; // Feel free to change
 let VISIBLE_COUNT = 10; // Feel free to change as well
 let totalHeight = (NUM_ITEMS - 1) * ITEM_HEIGHT;
 const scrollContainer = d3.select('#scroll-container');

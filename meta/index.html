@@ -16,14 +16,15 @@
     <p>
         This page includes stats about the code of this website.
     </p>
-<!-- 
-    <div class="commit-filter">
-        <label for="commit-slider">Show commits until:</label>
-        <input type="range" id="commit-slider" min="0" max="100" value="100"/>
-        <time id="commit-time-slider"></time>
-    </div> -->
 
-    <dl class="files"></dl>
+    <div id="files-scrollytelling">
+        <div id="files-scroll-container">
+            <div id="files-spacer"></div>
+            <div id="files-items-container"></div>
+        </div>
+        <!-- our old files -->
+        <dl class="files"></dl>
+    </div>
 
     <h2>Summary</h2>
     <div id="stats"></div>
