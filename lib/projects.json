@@ -1,5 +1,12 @@
 [
     {
+        "title": "Final Proj",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "temporary text",
+        "url": ""
+    },
+    {
         "title": "Visualizing Bike Traffic in Boston Area",
         "year": "2025",
         "image": "../images/biketraffic_project.png",
@@ -74,13 +81,6 @@
         "year": "2021",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Dolor excepturi aspernatur error aperiam officiis totam rem qui esse tempore, dolores alias sint facere deleniti nam quae iste, velit ullam? Quisquam quam quod ratione quas corrupti facilis magni vero?",
-        "url": ""
-    },
-    {
-        "title": "Maxime molestiae sed explicabo!",
-        "year": "2020",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Deserunt iusto libero molestias officia ipsam sequi, incidunt reprehenderit nisi unde odit nesciunt repudiandae. Deleniti sed nisi veritatis expedita veniam consequuntur nam facilis corporis culpa sit. Amet modi obcaecati itaque.",
         "url": ""
     }
 ]
