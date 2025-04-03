@@ -140,8 +140,9 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
       projectURL = `<p class="project-url"><a href="${element.url}" target="_blank">View Project</a></p>`;
     }
 
-    // Adjust image path dynamically
-    const imagePath = ARE_WE_HOME ? element.image : `../${element.image}`;
+    // Prepend /portfolio/ to the image path
+    const imagePath = `/portfolio${element.image}`;
+    console.log(imagePath);
 
     article.innerHTML = `
         <h3>${element.title}</h3>
