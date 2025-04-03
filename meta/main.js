@@ -363,7 +363,6 @@ function renderItems(startIndex) {
                                    .style('position', 'relative')  // Position relative to each other
                                    .style('margin-bottom', '10px') // Space between each commit
                                    .style('border-bottom', '1px solid #ddd') // Optional: a separator line between commits
-                                   .style('background-color', '#f9f9f9'); // Background for each commit
 
   // Append the narrative for each commit
   commitDivs.html((commit, index) => `

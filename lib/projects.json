@@ -1,10 +1,10 @@
 [
     {
-        "title": "Final Proj",
+        "title": "Neurological Diseases and Their Effects on Gait",
         "year": "2025",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "temporary text",
-        "url": ""
+        "image": "../images/gait_project.png",
+        "description": "I worked in a group to develop a storytelling visualization to show the walking strides and speeds of people with different neurological diseases compared to a healthy person. We used a PhysioNet dataset that included walking stride interval time series data where we processed the data to calculate the positionality and time for each subject for the left and right foot. By using HTML, CSS, JavaScript, and D3.js we created interactive visualizations to showcase that neurological diseases do affect how one moves.",
+        "url": "https://excalibean.github.io/Neuro-Disease-Effects-on-Gait-Visualization/"
     },
     {
         "title": "Visualizing Bike Traffic in Boston Area",
@@ -14,11 +14,25 @@
         "url": "https://lseseri.github.io/biketraffic/"
     },
     {
+        "title": "Impact of Emotions on Frequency Spectra in EEG Signals",
+        "year": "2025",
+        "image": "../images/emotions_EEG_project.png",
+        "description": "I worked in a group to investigate the relationship between emotional expression and the frequency spectrum of speech signals by analyzing speech recordings from the AESDD dataset that contained .wav files for emotions: anger, disgust, fear, happiness, sadness. We converted the time-domain signals into frequency domains using STFT and analyzed spectral markers to determine how different emotions influence pitch and energy distribution in speech.",
+        "url": "https://github.com/MoMo339610/COGS118C_FinalProject"
+    },
+    {
+        "title": "EEG-Based Student Confusion Detection",
+        "year": "2025",
+        "image": "../images/EEG_confusion_project.png",
+        "description": "I worked in a group to explore how EEG signals can be used to detect student confusion while watching educational videos. We used machine learning models, including SVM and XGBoost, to classify whether a student was confused or not based on EEG data. Through preprocessing, feature selection, and exploratory data analysis, we identified key EEG frequency bands that were predictive of confusion. ",
+        "url": "https://github.com/lseseri/EEG_confusion_analysis"
+    },
+    {
         "title": "The Impact of Age, Weight, and Height on Anesthesia Depth During Surgery",
         "year": "2025",
         "image": "../images/anesthesia_project.png",
         "description": "I worked in a group to implement an interactive visualization using Korean surgery data to be able to adjust the age, height, and weight of a person and see the corresponding amount of anesthesia given throughout the duration of a surgery. We extracted the data from an API and were able to perform exploratory data analysis to upload the data needed for creating the visualization using D3.",
-        "url": "https://masteryoda29.github.io/dsc106_project3/"
+        "url": "https://michaelren-dspy.github.io/dsc106_project3/"
     },
     {
         "title": "Seasonal Trends Impact on Rain and Sunshine",
@@ -47,40 +61,5 @@
         "image": "../images/walkability_project.png",
         "description": "I investigated the relationship between walkability and health problems at both a county and state level in the U.S. I analyzed two datasets including a walkability index and physical health data. By merging and analyzing data, I seeked to determine if places that have higher walkability scores would have less health problems.",
         "url": "https://github.com/COGS108/Group008_WI24/blob/master/FinalProject_Group008_WI24.ipynb"
-    },
-    {
-        "title": "Iste pariatur nobis necessitatibus!",
-        "year": "2023",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Quos dolore aspernatur odit tempora perspiciatis fuga quas, nesciunt necessitatibus laudantium. Obcaecati doloribus impedit beatae natus tempora rerum maiores, voluptas esse itaque ut fugit maxime id quaerat voluptates consequuntur illum?",
-        "url": ""
-    },
-    {
-        "title": "Aut nulla adipisci veniam?",
-        "year": "2023",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Odit illum dolores laudantium eos porro soluta architecto corrupti suscipit totam aperiam iste est, hic sequi dignissimos dolor saepe facilis molestiae sapiente doloremque itaque nam corporis reiciendis velit blanditiis? Illo.",
-        "url": ""
-    },
-    {
-        "title": "Totam sit dolor nesciunt!",
-        "year": "2022",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Nisi, labore! Veritatis, tempora? Optio velit asperiores, debitis minus ab est? Doloremque quibusdam nulla illum asperiores praesentium, maxime repudiandae laboriosam error? Consectetur ipsum hic fuga nesciunt itaque corrupti fugiat quibusdam?",
-        "url": ""
-    },
-    {
-        "title": "Ipsam quia earum fugit?",
-        "year": "2022",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Assumenda rem alias soluta. Esse repellendus neque rem vitae assumenda. Culpa, nulla eaque architecto nisi animi molestias corrupti fugit eos odio exercitationem soluta. Debitis, accusamus laborum accusantium ut magni tenetur?",
-        "url": ""
-    },
-    {
-        "title": "Velit fugiat magnam laboriosam?",
-        "year": "2021",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Dolor excepturi aspernatur error aperiam officiis totam rem qui esse tempore, dolores alias sint facere deleniti nam quae iste, velit ullam? Quisquam quam quod ratione quas corrupti facilis magni vero?",
-        "url": ""
     }
 ]

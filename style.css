@@ -319,7 +319,7 @@ circle.selected {
 .file dd {
   grid-column: 2;
 }
-dd {
+body.meta dd {
   grid-column: 2;
   display: flex;
   flex-wrap: wrap;
