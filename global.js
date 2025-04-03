@@ -142,7 +142,6 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
 
     // Prepend /portfolio/ to the image path
     const imagePath = `/portfolio${element.image}`;
-    console.log(imagePath);
 
     article.innerHTML = `
         <h3>${element.title}</h3>
