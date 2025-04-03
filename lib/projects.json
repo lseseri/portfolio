@@ -2,63 +2,63 @@
     {
         "title": "Neurological Diseases and Their Effects on Gait",
         "year": "2025",
-        "image": "../images/gait_project.png",
+        "image": "/images/gait_project.png",
         "description": "I worked in a group to develop a storytelling visualization to show the walking strides and speeds of people with different neurological diseases compared to a healthy person. We used a PhysioNet dataset that included walking stride interval time series data where we processed the data to calculate the positionality and time for each subject for the left and right foot. By using HTML, CSS, JavaScript, and D3.js we created interactive visualizations to showcase that neurological diseases do affect how one moves.",
         "url": "https://excalibean.github.io/Neuro-Disease-Effects-on-Gait-Visualization/"
     },
     {
         "title": "Visualizing Bike Traffic in Boston Area",
         "year": "2025",
-        "image": "../images/biketraffic_project.png",
+        "image": "/images/biketraffic_project.png",
         "description": "I built an immersive, interactive map visualization of bike traffic in the Boston area during different times of day. I used D3, a Mapbox map, and a large dataset of real-world data to create a webpage that contains panning, zooming, and filtering to show bike lanes, bike stations, bike traffic, and traffic flow.",
         "url": "https://lseseri.github.io/biketraffic/"
     },
     {
         "title": "Impact of Emotions on Frequency Spectra in EEG Signals",
         "year": "2025",
-        "image": "../images/emotions_EEG_project.png",
+        "image": "/images/emotions_EEG_project.png",
         "description": "I worked in a group to investigate the relationship between emotional expression and the frequency spectrum of speech signals by analyzing speech recordings from the AESDD dataset that contained .wav files for emotions: anger, disgust, fear, happiness, sadness. We converted the time-domain signals into frequency domains using STFT and analyzed spectral markers to determine how different emotions influence pitch and energy distribution in speech.",
         "url": "https://github.com/MoMo339610/COGS118C_FinalProject"
     },
     {
         "title": "EEG-Based Student Confusion Detection",
         "year": "2025",
-        "image": "../images/EEG_confusion_project.png",
+        "image": "/images/EEG_confusion_project.png",
         "description": "I worked in a group to explore how EEG signals can be used to detect student confusion while watching educational videos. We used machine learning models, including SVM and XGBoost, to classify whether a student was confused or not based on EEG data. Through preprocessing, feature selection, and exploratory data analysis, we identified key EEG frequency bands that were predictive of confusion. ",
         "url": "https://github.com/lseseri/EEG_confusion_analysis"
     },
     {
         "title": "The Impact of Age, Weight, and Height on Anesthesia Depth During Surgery",
         "year": "2025",
-        "image": "../images/anesthesia_project.png",
+        "image": "/images/anesthesia_project.png",
         "description": "I worked in a group to implement an interactive visualization using Korean surgery data to be able to adjust the age, height, and weight of a person and see the corresponding amount of anesthesia given throughout the duration of a surgery. We extracted the data from an API and were able to perform exploratory data analysis to upload the data needed for creating the visualization using D3.",
         "url": "https://michaelren-dspy.github.io/dsc106_project3/"
     },
     {
         "title": "Seasonal Trends Impact on Rain and Sunshine",
         "year": "2025",
-        "image": "../images/seasonaltrends_project.png",
+        "image": "/images/seasonaltrends_project.png",
         "description": "I examined a set of monthly climate measurements for six major U.S. cities, and I created an expository visualization in order to determine sunshine and rainfall in different places are affected by temporal changes. The visualization allows for the comparison between east and west coast cities and how the amount of sunshine relates to the amount of rainfall these places receive.",
         "url": ""
     },
     {
         "title": "How Ovulation of Female Mice Affects Body Temperature",
         "year": "2025",
-        "image": "../images/deceptive_project.png",
+        "image": "/images/deceptive_project.png",
         "description": "I created a deceptive visualization to highlight how visualization designs can aim to intentionally mislead the viewer. Specifically, I focused on a dataset that contains information about female and male mice body temperatures and activity over the course of two weeks. The visualization allows the viewer to come to the incorrect inference that when female mice are ovulating, their body temperature is higher.",
         "url": ""
     },
     {
         "title": "Exploring the Seasonal Trends in Recipe Ratings",
         "year": "2024",
-        "image": "../images/RecipeRating_project.png",
+        "image": "/images/RecipeRating_project.png",
         "description": "I analyzed and cleaned the two datasets about recipes and ratings. I assessed the missingness of the data and performed a hypothesis test to determine if ratings differ between warmer and cooler seasons. I also created a model to be able to predict the rating of a recipe.",
         "url": "https://lseseri.github.io/RecipeRatings/"
     },
     {
         "title": "Stepwise Health: Examining Relationship Between Walkability and Physical Health in Counties and States",
         "year": "2024",
-        "image": "../images/walkability_project.png",
+        "image": "/images/walkability_project.png",
         "description": "I investigated the relationship between walkability and health problems at both a county and state level in the U.S. I analyzed two datasets including a walkability index and physical health data. By merging and analyzing data, I seeked to determine if places that have higher walkability scores would have less health problems.",
         "url": "https://github.com/COGS108/Group008_WI24/blob/master/FinalProject_Group008_WI24.ipynb"
     }
