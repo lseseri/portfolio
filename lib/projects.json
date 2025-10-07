@@ -2,7 +2,7 @@
     {
         "title": "Spatial-Temporal Deep Learning for Climate Forecasting",
         "year": "2025",
-        "image": "/images/output_visualization.png",
+        "image": "/images/output_visualizations.png",
         "description": "Developed deep learning models to emulate computationally expensive climate simulations using CMIP6 data. Implemented and compared CNN, ConvLSTM, and hybrid CNN+ConvLSTM architectures to forecast precipitation and surface air temperature over space and time. Evaluated models on decadal and monthly error metrics, achieving strong predictive performance while demonstrating the efficiency of learned models for real-time climate forecasting and scenario analysis.",
         "url": "https://github.com/ssgadient/CSE151B_Team55"
     },
